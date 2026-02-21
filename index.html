@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Billing</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Restaurant Billing</h1>
+    <nav class="nav">
+      <button type="button" class="nav-btn active" data-section="menu">Menu</button>
+      <button type="button" class="nav-btn" data-section="cart">Cart / Bill</button>
+      <button type="button" class="nav-btn" data-section="manage">Manage Menu</button>
+      <button type="button" class="nav-btn" data-section="sales">Sales Report</button>
+    </nav>
+  </header>
+
+  <main class="main">
+    <!-- Menu (customer view) -->
+    <section id="section-menu" class="section active">
+      <h2>Menu</h2>
+      <p class="hint">Click an item to add it to the cart.</p>
+      <div id="menu-grid" class="menu-grid"></div>
+    </section>
+
+    <!-- Cart / Bill -->
+    <section id="section-cart" class="section">
+      <h2>Cart & Bill</h2>
+      <div class="cart-layout">
+        <div id="cart-items" class="cart-items"></div>
+        <div class="cart-summary">
+          <p class="total-line">Total: <span id="bill-total">0</span></p>
+          <div class="cart-actions">
+            <button type="button" id="btn-pay-now" class="btn btn-primary">Pay Now</button>
+            <button type="button" id="btn-print-bill" class="btn btn-secondary">Print Bill</button>
+            <button type="button" id="btn-clear-cart" class="btn btn-outline">Clear Cart</button>
+          </div>
+        </div>
+      </div>
+      <div id="bill-print-area" class="bill-print-area" aria-hidden="true"></div>
+    </section>
+
+    <!-- Manage Menu -->
+    <section id="section-manage" class="section">
+      <h2>Manage Menu</h2>
+      <div class="settings-block">
+        <label>Restaurant UPI ID (for Pay Now QR) <input type="text" id="setting-upi-id" placeholder="yourname@upi"></label>
+        <button type="button" id="btn-save-upi" class="btn btn-outline btn-small">Save UPI ID</button>
+      </div>
+      <div class="manage-form">
+        <input type="hidden" id="edit-id" value="">
+        <label>Name <input type="text" id="item-name" placeholder="Item name"></label>
+        <label>Price (₹) <input type="number" id="item-price" placeholder="0" min="0" step="0.01"></label>
+        <label>Image URL <input type="text" id="item-image" placeholder="https://... or images/idly.jpg"></label>
+        <div class="form-actions">
+          <button type="button" id="btn-save-item" class="btn btn-primary">Save Item</button>
+          <button type="button" id="btn-cancel-edit" class="btn btn-outline">Cancel</button>
+        </div>
+      </div>
+      <div id="manage-list" class="manage-list"></div>
+    </section>
+
+    <!-- Sales Report -->
+    <section id="section-sales" class="section">
+      <h2>Monthly Sales Report</h2>
+      <div class="sales-controls">
+        <label>Month <select id="sales-month"></select></label>
+      </div>
+      <div id="sales-summary" class="sales-summary"></div>
+      <div id="sales-orders" class="sales-orders"></div>
+    </section>
+  </main>
+
+  <!-- Pay Now QR modal -->
+  <div id="qr-modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <h3>Scan to Pay</h3>
+      <div id="qr-container"></div>
+      <p class="qr-amount">Amount: <span id="qr-amount">0</span></p>
+      <button type="button" id="btn-close-qr" class="btn btn-outline">Close</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/billing.js"></script>
+  <script src="js/qr.js"></script>
+  <script src="js/sales.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
